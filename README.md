@@ -11,7 +11,7 @@ Web Components for Web Audio API
 - Rich UI by Simple tag
 - Play the One-Shot Audio
 - Create Sound
-- Simple Effector (Envelope Generator, Transpose, Glide)
+- Simple Effectors (Envelope Generator, Transpose, Glide)
   
 ## Demo
   
@@ -19,22 +19,32 @@ Web Components for Web Audio API
   
 ## Installation
   
-    $ npm install x-piano
-  
-  or,
-  
-    $ bower install x-piano
+```bash
+$ npm install --save x-piano
+```
   
 ## Usage
   
+The &lt;x-piano&gt; requires 3 scripts.
+  
+```HTML
+<script type="text/javascript" src="https://cdn.rawgit.com/Korilakkuma/XSound/master/build/xsound.js"></script>
+<script type="module" src="src/components/index.js"></script>
+<script defer nomodule src="build/app.js"></script>
+```
+  
 Describe &lt;x-piano&gt; tag.
   
-    <x-piano></x-piano>
+```HTML
+<x-piano></x-piano>
+```
   
 Moreover, &lt;x-piano&gt; tag can have some attributes.  
 For example,
   
-    <x-piano type="sawtooth" volume="0.4" attack="1" glide="1.5"></x-piano>
+```HTML
+<x-piano type="sawtooth" volume="0.4" attack="1" glide="1.5"></x-piano>
+```
   
 Refer to the following table for attribute details.
   
@@ -42,18 +52,16 @@ Refer to the following table for attribute details.
   
 |  Attribute | Description                  | Value                                                                      |
 |:-----------|:-----------------------------|:---------------------------------------------------------------------------|
+| loading    | Apply style for loading      | boolean attribute                                                          |
 | ui-only    | Not use sound                | boolean attribute                                                          |
-| responsive | Responsive Layout            | boolean attribute                                                          |
-| theme      | Piano Design                 | 'normal' (default), 'fiber', 'wood', 'crystal', 'flat', 'keyboard', 'none' |
 | type       | Sound Source                 | 'piano' (default), 'sine', 'square', 'sawtooth', 'triangle'                |
 | volume     | Master Volume                | 0.0 - 1.0 (1.0  by default)                                                |
+| transpose  | Transpose (One-Shot only)    | Greater than or equal to 0.0 (0.0 by default)                              |
+| glide      | Glide (Oscillator only)      | Greater than or equal to 0.0 (0.0 by default)                              |
 | attack     | Envelope Generator (Attack)  | 0.0 - 1.0 (0.01 by default)                                                |
 | decay      | Envelope Generator (Decay)   | 0.0 - 1.0 (0.3  by default)                                                |
 | sustain    | Envelope Generator (Sustain) | 0.0 - 1.0 (1.0  by default)                                                |
 | release    | Envelope Generator (Release) | 0.0 - 1.0 (1.0  by default)                                                |
-| transpose  | Transpose                    | Integer   (0    by default)                                                |
-| glide      | Glide (Oscillator only)      | 0.0 -     (0.0  by default)                                                |
-| value      | Keyboard Index               | JSON (readonly)                                                            |
   
 ## License
   

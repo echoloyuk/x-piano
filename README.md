@@ -11,7 +11,7 @@ Web Components for Web Audio API
 - Rich UI by Simple tag
 - Play the One-Shot Audio
 - Create Sound
-- Simple Effector (Envelope Generator, Transpose, Glide)
+- Simple Effectors (Envelope Generator, Transpose, Glide)
   
 ## Demo
   
@@ -20,10 +20,6 @@ Web Components for Web Audio API
 ## Installation
   
     $ npm install x-piano
-  
-  or,
-  
-    $ bower install x-piano
   
 ## Usage
   
@@ -42,18 +38,16 @@ Refer to the following table for attribute details.
   
 |  Attribute | Description                  | Value                                                                      |
 |:-----------|:-----------------------------|:---------------------------------------------------------------------------|
+| loading    | Apply style for loading      | boolean attribute                                                          |
 | ui-only    | Not use sound                | boolean attribute                                                          |
-| responsive | Responsive Layout            | boolean attribute                                                          |
-| theme      | Piano Design                 | 'normal' (default), 'fiber', 'wood', 'crystal', 'flat', 'keyboard', 'none' |
 | type       | Sound Source                 | 'piano' (default), 'sine', 'square', 'sawtooth', 'triangle'                |
 | volume     | Master Volume                | 0.0 - 1.0 (1.0  by default)                                                |
+| transpose  | Transpose (One-Shot only)    | Greater than or equal to 0.0 (0.0 by default)                              |
+| glide      | Glide (Oscillator only)      | Greater than or equal to 0.0 (0.0 by default)                              |
 | attack     | Envelope Generator (Attack)  | 0.0 - 1.0 (0.01 by default)                                                |
 | decay      | Envelope Generator (Decay)   | 0.0 - 1.0 (0.3  by default)                                                |
 | sustain    | Envelope Generator (Sustain) | 0.0 - 1.0 (1.0  by default)                                                |
 | release    | Envelope Generator (Release) | 0.0 - 1.0 (1.0  by default)                                                |
-| transpose  | Transpose                    | Integer   (0    by default)                                                |
-| glide      | Glide (Oscillator only)      | 0.0 -     (0.0  by default)                                                |
-| value      | Keyboard Index               | JSON (readonly)                                                            |
   
 ## License
   

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>x-piano | Web Components</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family:'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+            font-size:16px;
+            line-height:1.5;
+            color:#777;
+            background-color:#fafafa;
+        }
+
+        header {
+            margin-bottom: 48px;
+            padding: 32px 0;
+            text-align: center;
+            background-color: #000;
+        }
+
+        header > h1 {
+            font-family :'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+            font-size: 2rem;
+            font-weight:lighter;
+            color: #C0C;
+        }
+
+        x-piano + section {
+            margin: 48px auto 0;
+            width: 1228px;
+        }
+
+        fieldset {
+            padding: 32px;
+        }
+
+        legend {
+            font-size: 22px;
+        }
+
+        dl {
+            color: #999;
+        }
+
+        dl dt {
+            margin: 8px 0;
+            font-size: 1.125rem;
+        }
+
+        dl dt:before {
+            content: "";
+            display: inline-block;
+            margin-right: 8px;
+            border-top: 10px solid rgba(0, 0, 0, 0);
+            border-bottom: 10px solid rgba(0, 0, 0, 0);
+            border-left: 15px solid #999;
+            vertical-align: -4px;
+        }
+
+        input,
+        label {
+            cursor:pointer;
+        }
+
+        [type="checkbox"] {
+            margin-right: 4px;
+        }
+
+        [type="radio"] {
+            margin: 0 4px;
+        }
+
+        footer {
+            margin: 48px 0 0;
+            padding: 48px 0;
+            color: #fafafa;
+            text-align: center;
+            background-color: #000;
+        }
+
+        small {
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Web Components &lt;x-piano&gt;</h1>
+    </header>
+    <x-piano loading type="piano"></x-piano>
+    <section>
+        <fieldset>
+            <legend>Attribute Controller</legend>
+            <dl>
+                <dt><label><input type="checkbox" id="checkbox-ui-only" /> ui-only</label></dt>
+                <dd hidden>ui-only</dd>
+                <dt>type</dt>
+                <dd>
+                    <form id="form-type">
+                        <label><input type="radio" name="radio-type" value="piano" checked /> piano</label>
+                        <label><input type="radio" name="radio-type" value="sine" /> sine</label>
+                        <label><input type="radio" name="radio-type" value="square" /> square</label>
+                        <label><input type="radio" name="radio-type" value="sawtooth" /> sawtooth</label>
+                        <label><input type="radio" name="radio-type" value="triangle" /> triangle</label>
+                    </form>
+                </dd>
+                <dt><label for="range-volume">volume : <span id="output-volume">1</span></label></dt>
+                <dd><input type="range" id="range-volume" value="1" min="0" max="1" step="0.05" /></dd>
+                <dt><label for="range-transpose">transpose : <span id="output-transpose">0</span></label></dt>
+                <dd><input type="range" id="range-transpose" value="0" min="0" max="2" step="0.125" /></dd>
+                <dt><label for="range-glide">glide : <span id="output-glide">0</span></label></dt>
+                <dd><input type="range" id="range-glide" value="0" min="0" max="1" step="0.05" /></dd>
+            </dl>
+            <dl>
+                <dt><label for="range-attack">attack : <span id="output-attack">0.01</span></label></dt>
+                <dd><input type="range" id="range-attack" value="0.01" min="0" max="1" step="0.01" /></dd>
+                <dt><label for="range-decay">decay : <span id="output-decay">0.3</span></label></dt>
+                <dd><input type="range" id="range-decay" value="0.3" min="0" max="1" step="0.01" /></dd>
+                <dt><label for="range-sustain">sustain : <span id="output-sustain">1</span></label></dt>
+                <dd><input type="range" id="range-sustain" value="1" min="0" max="1" step="0.01" /></dd>
+                <dt><label for="range-release">release : <span id="output-release">1</span></label></dt>
+                <dd><input type="range" id="range-release" value="1" min="0" max="1" step="0.01" /></dd>
+            </dl>
+        </fieldset>
+    </section>
+    <footer>
+        <small>Copyright 2014 - 2018 (c) Tomohiro IKEDA</small>
+    </footer>
+    <script type="text/javascript" src="https://cdn.rawgit.com/Korilakkuma/XSound/master/build/xsound.js"></script>
+    <script type="module" src="src/components/index.js"></script>
+    <script defer nomodule src="build/app.js"></script>
+    <script type="text/javascript">
+        (() => {
+            const xpiano = document.querySelector('x-piano');
+
+            document.getElementById('checkbox-ui-only').addEventListener('click', event => {
+                if (event.currentTarget.checked) {
+                    xpiano.setAttribute('ui-only', '');
+                } else {
+                    xpiano.removeAttribute('ui-only');
+                }
+            }, false);
+
+            document.getElementById('form-type').addEventListener('change', event => {
+                const form = event.currentTarget;
+
+                for (const radio of form.elements['radio-type']) {
+                    if (radio.checked) {
+                        xpiano.setAttribute('type', radio.value);
+                        break;
+                    }
+                }
+            }, false);
+
+            document.getElementById('range-volume').addEventListener('input', event => {
+                const volume = event.currentTarget.value;
+
+                xpiano.setAttribute('volume', volume);
+                document.getElementById('output-volume').textContent = volume;
+            }, false);
+
+            document.getElementById('range-transpose').addEventListener('input', event => {
+                const transpose = event.currentTarget.value;
+
+                xpiano.setAttribute('transpose', transpose);
+                document.getElementById('output-transpose').textContent = transpose;
+            }, false);
+
+            document.getElementById('range-glide').addEventListener('input', event => {
+                const glide = event.currentTarget.value;
+
+                xpiano.setAttribute('glide', glide);
+                document.getElementById('output-glide').textContent = glide;
+            }, false);
+
+            document.getElementById('range-attack').addEventListener('input', event => {
+                const attack = event.currentTarget.value;
+
+                xpiano.setAttribute('attack', attack);
+                document.getElementById('output-attack').textContent = attack;
+            }, false);
+
+            document.getElementById('range-decay').addEventListener('input', event => {
+                const decay = event.currentTarget.value;
+
+                xpiano.setAttribute('decay', decay);
+                document.getElementById('output-decay').textContent = decay;
+            }, false);
+
+            document.getElementById('range-sustain').addEventListener('input', event => {
+                const sustain = event.currentTarget.value;
+
+                xpiano.setAttribute('sustain', sustain);
+                document.getElementById('output-sustain').textContent = sustain;
+            }, false);
+
+            document.getElementById('range-release').addEventListener('input', event => {
+                const release = event.currentTarget.value;
+
+                xpiano.setAttribute('release', release);
+                document.getElementById('output-release').textContent = release;
+            }, false);
+        })();
+    </script>
+</body>
+</html>

@@ -42,6 +42,8 @@ export default class Piano extends HTMLElement {
 
         if (this.type === 'piano') {
             X('oneshot').start(index);
+        } else if (this.type === 'noise') {
+            X('noise').start();
         } else {
             const frequency = X.toFrequencies(index);
             X('oscillator').start(frequency);
@@ -61,6 +63,8 @@ export default class Piano extends HTMLElement {
 
         if (this.type === 'piano') {
             X('oneshot').stop(index);
+        } else if (this.type === 'noise') {
+            X('noise').stop();
         } else {
             X('oscillator').stop();
         }
@@ -81,6 +85,8 @@ export default class Piano extends HTMLElement {
 
         if (this.type === 'piano') {
             X('oneshot').start(index);
+        } else if (this.type === 'noise') {
+            X('noise').start();
         } else {
             const frequency = X.toFrequencies(index);
             X('oscillator').start(frequency);
@@ -102,6 +108,8 @@ export default class Piano extends HTMLElement {
 
         if (this.type === 'piano') {
             X('oneshot').stop(index);
+        } else if (this.type === 'noise') {
+            X('noise').stop();
         } else {
             X('oscillator').stop();
         }
@@ -117,7 +125,7 @@ export default class Piano extends HTMLElement {
 
         this.type = this.getAttribute('type');
 
-        if (this.type !== 'piano') {
+        if ((this.type !== 'piano') || (this.type !== 'noise')) {
             X('oscillator').get(0).param('type', this.type);
         }
 

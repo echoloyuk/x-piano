@@ -6,6 +6,7 @@ export default class Piano extends HTMLElement {
             'ui-only',
             'type',
             'volume',
+            'octave',
             'transpose',
             'glide',
             'attack',
@@ -128,6 +129,8 @@ export default class Piano extends HTMLElement {
         if ((this.type !== 'piano') || (this.type !== 'noise')) {
             X('oscillator').get(0).param('type', this.type);
         }
+
+        X('oscillator').get(0).param('octave', this.getAttribute('octave'));
 
         X('oneshot').param('mastervolume', this.getAttribute('volume'));
         X('oneshot').param('transpose', this.getAttribute('transpose'));

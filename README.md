@@ -56,6 +56,7 @@ Refer to the following table for attribute details.
 | ui-only    | Not use sound                | boolean attribute                                                          |
 | type       | Sound Source                 | 'piano' (default), 'sine', 'square', 'sawtooth', 'triangle'                |
 | volume     | Master Volume                | 0.0 - 1.0 (1.0  by default)                                                |
+| octave     | Octave (Oscillator only      | number                                                                     |
 | transpose  | Transpose (One-Shot only)    | Greater than or equal to 0.0 (0.0 by default)                              |
 | glide      | Glide (Oscillator only)      | Greater than or equal to 0.0 (0.0 by default)                              |
 | attack     | Envelope Generator (Attack)  | 0.0 - 1.0 (0.01 by default)                                                |
